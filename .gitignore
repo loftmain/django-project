@@ -123,3 +123,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.xml
+*.iml
+*.zip
+ch99/bookmark/migrations/0001_initial.py
