@@ -16,6 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+from bookmark.views import BookmarkLV, BookmarkDV
+
 urlpatterns = [
+    # 어디로 가야하는지 경로 지정하는 것
     path('admin/', admin.site.urls),
+
+    # class-based views
+    path('bookmark/', BookmarkLV.as_view(), name='index'),
+    # int 형의 primary key 가 붙으면 BookmarkDV로 넘겨줌
+    path('bookmark/<int:pk>/', BookmarkDV.as_view(), name='detail'),
 ]
+
