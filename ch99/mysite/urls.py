@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from mysite.views import HomeView
 
 
 urlpatterns = [
     # 어디로 가야하는지 경로 지정하는 것
     path('admin/', admin.site.urls),
+    # 루트디렉토리
+    path("", HomeView.as_view(), name='home'),
     path("bookmark/", include("bookmark.urls")),
     path("blog/", include("blog.urls")),
 ]
