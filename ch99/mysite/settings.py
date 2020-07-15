@@ -131,3 +131,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
+
+# disqus  댓글 사용
+DISQUS_SHORTNAME = 'jerrys-blog'
+DISQUS_MY_DOMAIN = ['http://127.0.0.1:8000']
