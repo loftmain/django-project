@@ -42,9 +42,17 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'bookmark:index' %}">Bookmark</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog:index' %}">Blog</a>
-          </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Blog
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'blog:post_list' %}">Post</a>
+          <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
           </li>

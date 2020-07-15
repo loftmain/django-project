@@ -7,9 +7,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Archive</h1>
-            <span class="subheading">아카이브 입니다</span>
+          <div class="post-heading">
+            <h1>{{ object.title }}</h1>
+              <h2 class="subheading">
+                {{ object.description }}
+              </h2>
+            <span class="meta">Posted by
+              <a href="#">Jinjae Lee</a>
           </div>
         </div>
       </div>
@@ -18,28 +22,30 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ object.title }}</h2>
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col=lg-8 col-md-10 mx-auto">
+                <p>{{ object.modify_dt|date:"j F Y" }}</p>
+                <p>{{ object.content|linebreaks }}</p>
+            </div>
+            <br>
+            <div>
+                <b>TAGS</b> <i class="fas fa-tag"></i>
+                {% load taggit_templatetags2_tags %}
+                {% get_tags_for_object object as "tags" %}
+                {% for tag in tags %}
+                <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
+                {% endfor %}
+                &emsp;
+                <a href="{% url 'blog:tag_cloud' %}"> <span class="btn btn-info btn-sm">TagCloud</span></a>
+            </div>
+        </div>
+    </div>
+</article>
 
-<p>
-    {% if object.get_previous %}
-    <a href="{{ object.get_previous.get_absolute_url }}" title="View previous post">
-        &laquo;- {{ object.get_previous }}
-    </a>
-    {% endif %}
 
-    {% if object.get_next %}
-    | <a href="{{ object.get_next.get_absolute_url }}" title="View next post">
-    {{ object.get_next }} -&raquo;
-    </a>
-    {% endif %}
-</p>
 
-<p>{{ object.modify_dt|date:"j F Y" }}</p>
-<br>
-
-<div>
-    {{ object.content|linebreaks }}
-</div>
 {% endblock %}
 
 {% block extra-script %}{% endblock %}
