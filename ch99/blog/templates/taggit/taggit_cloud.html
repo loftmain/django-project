@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Django Blog {% endblock %}
+{% block header %}
+  <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Tag Cloud</h1>
+            <span class="subheading">tag cloud</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+{% block extra-style %}
+<style type="text/css">
+.tag-cloud {
+    width: 40%;
+    margin-left: 30px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid orange;
+    background-color: #ffc;
+}
+.tag-1 {font-size: 12px;}
+.tag-2 {font-size: 14px;}
+.tag-3 {font-size: 16px;}
+.tag-4 {font-size: 18px;}
+.tag-5 {font-size: 20px;}
+.tag-6 {font-size: 24px;}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <ul>
+                <h1>Blog Tag Cloud</h1>
+                <br>
+
+                <div class="tag-cloud">
+                    {% load taggit_templatetags2_tags %}
+                    {% get_tagcloud as tags %}
+                    {% for tag in tags %}
+                    <span class="tag-{{tag.weight|floatformat:0}}">
+                        <a href="{% url 'blog:tagged_object_list' tag.name %}"> {{tag.name}}({{tag.num_times}})</a>
+                    </span>
+                    {% endfor %}
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
