@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %} Django Blog {% endblock %}
+{% block header %}
+  <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Post</h1>
+            <span class="subheading">Post all</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h1>Please Login</h1>
+            <p class="font-italic">Please enter your id and password.</p>
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <div class="font-weight-bold">Wrong! Please correct the error(s) below.</div>
+                {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <form action="." method="post" class="card pt-3">{% csrf_token %}
+
+                <div class="form-group row">
+                    {{ form.username|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                    <div class="col-sm-5">
+                        {{ form.username|add_class:"form-control"|attr:"autofocus" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    {{ form.password|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                    <div class="col-sm-5">
+                        {{ form.password|add_class:"form-control" }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="offset-sm-2 col-sm-5">
+                        <input type="submit" value="Log in" class="btn btn-info"/>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
+    'widget_tweaks',
+    'photo.apps.PhotoConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -135,3 +138,5 @@ TAGGIT_LIMIT = 50
 # disqus  댓글 사용
 DISQUS_SHORTNAME = 'jerrys-blog'
 DISQUS_MY_DOMAIN = ['http://127.0.0.1:8000']
+
+LOGIN_REDIRECT_URL = '/'

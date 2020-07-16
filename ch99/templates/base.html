@@ -42,6 +42,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'bookmark:index' %}">Bookmark</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'photo:index' %}">Photo</a>
+          </li>
           <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Blog
@@ -49,12 +52,30 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'blog:post_list' %}">Post</a>
           <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
+          <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          <li class="nav-item dropdown">
+            {% if user.is_active %}
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;
+            </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+              </div>
+            {% else %}
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>&ensp;Anonymous&ensp;</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+              <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+            </div>
+            {% endif %}
           </li>
         </ul>
       </div>

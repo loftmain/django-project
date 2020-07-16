@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Django Blog {% endblock %}
+{% block header %}
+  <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Album</h1>
+            <span class="subheading">Detail</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block extra-style %}
+<style>
+.thumbnail {
+    border: 5px solid #ccc;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="mt-5">
+                <span class="h2">{{ object.name }}&emsp;</span>
+                <span class="h5 font-italic">{{ object.description }}</span>
+            </div>
+
+            <hr style="margin: 0 0 20px 0;">
+
+            <div class="row">
+
+                {% for photo in object.photo_set.all %}
+                <div class="col-md-3 mb-5">
+                    <div class="thumbnail">
+                        <a href="{{ photo.get_absolute_url }}">
+                            <img src="{{ photo.image.thumb_url }}" style="width: 100%;">
+                        </a>
+                    </div>
+                    <ul>
+                        <li class="font-italic">{{ photo.title }}</li>
+                        <li class="font-italic">{{ photo.upload_dt|date:"Y-m-d" }}</li>
+                    </ul>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

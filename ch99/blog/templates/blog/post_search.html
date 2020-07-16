@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Django Blog {% endblock %}
+
+{% block header %}
+  <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Search</h1>
+            <span class="subheading">Search Post</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h1>Blog Search</h1>
+            <br>
+
+            <form action="." method="post"> {% csrf_token %}
+                {{ form.as_table }}
+                <input type="submit" value="submit" class="btn btn-primary btn-sm">
+            </form>
+
+            <br/><br/>
+
+            {% if object_list %}
+            {% for post in object_list %}
+                <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                {{ post.modify_date|date:"N d, Y" }}
+                <p>{{ post.description }}</p>
+            {% endfor %}
+
+            {% elif search_term %}
+                <b><i>Search Word({{ search_term }}) Not Fount !</i></b>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

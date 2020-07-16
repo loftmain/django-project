@@ -15,15 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+
 from mysite.views import HomeView
+from mysite.views import UserCreateView, UserCreateDoneTV
 
 
 urlpatterns = [
     # 어디로 가야하는지 경로 지정하는 것
     path('admin/', admin.site.urls),
+    # 아래 인증 URL 3개 추가
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', UserCreateView.as_view(), name='register'),
+    path('accounts/register/done/', UserCreateDoneTV.as_view(), name='register_done'),
     # 루트디렉토리
     path("", HomeView.as_view(), name='home'),
     path("bookmark/", include("bookmark.urls")),
     path("blog/", include("blog.urls")),
-]
+    path('photo/', include('photo.urls'))
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
