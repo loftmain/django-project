@@ -9,23 +9,37 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Bookmark</h1>
-            <span class="subheading">북마크 리스트 입니다.</span>
+            <span class="subheading">Bookmark list</span>
           </div>
         </div>
       </div>
     </div>
   </header>
 {% endblock %}
+
 {% block content %}
 <div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h1>Bookmark List</h1>
 
-    <h1>Bookmark List</h1>
-
-    <ul>
-        {% for bookmark in object_list %}
-            <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>
-        {% endfor %}
-    </ul>
+                <ul>
+                    {% for bookmark in object_list %}
+                        <li><a href="{% url 'bookmark:detail' bookmark.id %}">{{ bookmark }}</a></li>
+                    {% endfor %}
+                </ul>
+                    <a class="btn btn-primary float-right"
+                       href="{% url 'bookmark:change' %}">
+                        change
+                    </a>
+                        <a class="btn btn-primary float-right"
+                       href="{% url 'bookmark:add' %}">
+                        add
+                    </a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block extra-script %}{% endblock %}
