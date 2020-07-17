@@ -28,7 +28,7 @@
 {% block content %} 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-12 col-md-10 mx-auto">
             {% for item in object_list %}
 
             <div class="mt-5">
@@ -52,6 +52,23 @@
             </div>
 
             {% endfor %}
+            <a class="btn btn-primary float-right"
+               href="{% url 'photo:album_change' %}">
+                change album
+            </a>
+                <a class="btn btn-primary float-right"
+               href="{% url 'photo:photo_change' %}">
+                change photo
+            <a class="btn btn-primary float-right"
+               href="{% url 'photo:album_add' %}">
+                add album
+            </a>
+                <a class="btn btn-primary float-right"
+               href="{% url 'photo:photo_add' %}">
+                add photo
+            </a>
+
+            </a>
         </div>
     </div>
 </div>
